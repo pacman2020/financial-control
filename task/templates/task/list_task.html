@@ -3,22 +3,21 @@
 {% block title %} tasks {% endblock %}
 
 {% block content %}
-
-    <!-- <h2>all tasks</h2> -->
-    {% if tasks %}
-        {% for task in tasks %}
-        <div class="card mt-3">
-            <div class="card-body">
-              <h5 class="card-title">{{task.name}}</h5>
-              <p class="card-text">{{ task.create_at }}</p>
-              <a href="#" class="btn btn-primary">editar</a>
-              <a href="#" class="btn btn-danger">deletar</a>
-            </div>
-          </div>
-        {% endfor %}
-    {% else %}
-        <h3>não ah tarefas</h3>
-    {% endif %}
+<div class="row row-cols-1 row-cols-md-4 p-3">
+  {% for task in tasks%}
+  <div class="col mb-4">
+    <div class="card">
+      <div class="card-body">
+        <strong>tarefa: </strong><span>{{ task.name|slice:"15" }}...</span>
+        <strong>valor: </strong><span>{{ task.price }}</span>
+        <div>
+          <a href="#">veja mais ...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
     <div class="pagination d-flex justify-content-center m-4">
         <span class="step-link">
