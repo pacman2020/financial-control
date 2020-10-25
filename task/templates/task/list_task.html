@@ -3,6 +3,9 @@
 {% block title %} tasks {% endblock %}
 
 {% block content %}
+<div class="ml-3">
+  <a class="btn btn-success" href="{% url 'new_task' %}">novo serviço</a>
+</div>
 <div class="row row-cols-1 row-cols-md-4 p-3">
   {% for task in tasks%}
   <div class="col mb-4">
