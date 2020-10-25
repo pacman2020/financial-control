@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Task
 
@@ -13,3 +13,13 @@ def tasks(request):
     }
 
     return render(request, 'task/list_task.html', data)
+
+def detail_task(request, pk):
+    try:
+        task = get_object_or_404(Task,pk=pk)
+        data = {
+            'task': task
+        }
+        return render(request, 'task/detail_task.html',data)
+    except:
+        return redirect('tasks')

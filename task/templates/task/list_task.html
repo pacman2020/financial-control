@@ -11,7 +11,7 @@
         <strong>tarefa: </strong><span>{{ task.name|slice:"15" }}...</span>
         <strong>valor: </strong><span>{{ task.price }}</span>
         <div>
-          <a href="#">veja mais ...</a>
+          <a href="{% url 'detail_task' task.id %}">veja mais ...</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} detail task {% endblock %}
+
+{% block content %}
+<div>
+    <h3>Sobre o task</h2>
+        <p><strong>cidade: </strong>{{ task.name }}</p>
+        <p><strong>descrição: </strong>{{ task.price }}</p>
+        <p><strong>descrição: </strong>{{ task.active }}</p>
+        <p><strong>descrição: </strong>{{ task.create_at }}</p>
+        <div>
+            <button class="btn btn-primary" >editar</button>
+            <button class="btn btn-danger" >deletar</button>
+        </div>
+</div>
+{% endblock %}
