@@ -11,7 +11,7 @@
         <p><strong>descrição: </strong>{{ task.active }}</p>
         <p><strong>descrição: </strong>{{ task.create_at }}</p>
         <div>
-            <button class="btn btn-primary" >editar</button>
+            <a class="btn btn-primary" href="{% url 'update_task' task.pk %}">editar</a>
             <button class="btn btn-danger" >deletar</button>
         </div>
 </div>
