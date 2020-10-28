@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} employee {% endblock %}
+
+{% block content %}
+<div class="mt-4">
+  
+  <div class="ml-3">
+    <a class="btn btn-success" href="#">novo funcionario</a>
+  </div>
+  <div class="row row-cols-1 row-cols-md-4 p-3">
+    {% for employee in employees%}
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body">
+          <strong>nome: </strong><span>{{ employee.full_name|slice:"15" }}...</span>
+          <strong>ativo: </strong><span>{{ employee.active }}</span>
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="pagination d-flex justify-content-center m-4">
+    <span class="step-link">
+      {% if employees.has_previous %}
+      <a href="?page={{ employees.previous_page_number }}">voltar</a>
+      {% endif %}
+  
+      <span class="current">
+        {{ employees.number }} | {{  employees.paginator.num_pages }}
+      </span>
+  
+      {% if employees.has_next %}
+      <a href="?page={{ employees.next_page_number }}">proximo</a>
+      {% endif %}
+    </span>
+  </div>
+  
+</div>
+
+{% endblock %}

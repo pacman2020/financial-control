@@ -16,7 +16,6 @@ def tasks(request):
 
     return render(request, 'task/list_task.html', data)
 
-
 def detail_task(request, pk):
     try:
         task = get_object_or_404(Task,pk=pk)
