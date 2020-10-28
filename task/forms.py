@@ -9,4 +9,4 @@ class Taskform(forms.ModelForm):
     active = forms.BooleanField(label='tarefa ativa' ,required=True)
     class Meta:
         model = Task
-        fields = ('name','price','active',)
+        fields = ('name','price','employee','active',)
