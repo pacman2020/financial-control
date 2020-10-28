@@ -27,7 +27,6 @@ def detail_task(request, pk):
     except:
         return redirect('tasks')
 
-
 def new_task(request):
     if request.method == 'POST':
         form = Taskform(request.POST)
