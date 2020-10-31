@@ -22,3 +22,15 @@ def detail_employee(request, pk):
         return render(request, 'employee/detail_employee.html',data)
     except:
         return redirect('employees')
+
+def new_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            task= form.save(commit=False)
+            task.user_id = request.user
+            task.save()
+            return redirect('detail_employee', pk=task.pk)
+    else:
+        form = EmployeeForm()
+    return render(request, 'employee/new_update_employee.html', {'form':form})
