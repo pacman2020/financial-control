@@ -16,7 +16,7 @@
           <strong>nome: </strong><span>{{ employee.full_name|slice:"15" }}...</span>
           <strong>ativo: </strong><span>{{ employee.active }}</span>
           <div>
-
+            <a href="{% url 'detail_employee' employee.id %}">veja mais ...</a>
           </div>
         </div>
       </div>

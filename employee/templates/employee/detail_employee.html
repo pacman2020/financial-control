@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} detail task {% endblock %}
+
+{% block content %}
+<div class="mt-4">
+
+<div class="modal" id="confirm_exclir">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>deseja exclir esse funcionario?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-right">
+                <a type="button" class="btn btn-danger" href="#" >DELETER</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+      </div>
+</div>
+
+<div>
+    <h3>Sobre o Employee</h2>
+        
+        <p><strong>Nome: </strong>{{ employee.full_name }}</p>
+        <p><strong>ativo: </strong>{{ employee.active }}</p>
+        <div>
+            <a class="btn btn-primary" href="#">editar</a>
+            <button type="button" 
+                data-toggle="modal" 
+                data-target="#confirm_exclir" class="btn btn-danger" >
+                deletar
+            </button>
+        </div>
+</div>
+</div>
+{% endblock %}
