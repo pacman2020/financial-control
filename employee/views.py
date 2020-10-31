@@ -34,3 +34,19 @@ def new_employee(request):
     else:
         form = EmployeeForm()
     return render(request, 'employee/new_update_employee.html', {'form':form})
+
+def update_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk, user_id=request.user)
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            employee.save()
+            return redirect('detail_employee', pk=employee.pk)
+    else:
+        form = EmployeeForm(instance=employee)
+        data = {
+            'form':form,
+            'employee': employee
+        }
+        return render(request, 'employee/new_update_employee.html',data)

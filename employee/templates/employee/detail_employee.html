@@ -26,7 +26,7 @@
         <p><strong>Nome: </strong>{{ employee.full_name }}</p>
         <p><strong>ativo: </strong>{{ employee.active }}</p>
         <div>
-            <a class="btn btn-primary" href="#">editar</a>
+            <a class="btn btn-primary" href="{% url 'update_employee' employee.pk %}">editar</a>
             <button type="button" 
                 data-toggle="modal" 
                 data-target="#confirm_exclir" class="btn btn-danger" >
