@@ -58,10 +58,3 @@ def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk, user_id=request.user)
     task.delete()
     return redirect('tasks')
-
-def confirm_delete(request):
-    # id = request.GET.get('btn')
-    # if(id):
-    #     print('--->', id)
-    #     return redirect('detail_task', pk=id)
-    return redirect('tasks')

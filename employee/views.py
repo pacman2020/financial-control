@@ -50,3 +50,9 @@ def update_employee(request, pk):
             'employee': employee
         }
         return render(request, 'employee/new_update_employee.html',data)
+
+def delete_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk, user_id=request.user)
+    employee.active = False
+    employee.save()
+    return redirect('employees')

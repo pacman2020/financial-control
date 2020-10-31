@@ -10,6 +10,7 @@
   </div>
   <div class="row row-cols-1 row-cols-md-4 p-3">
     {% for employee in employees%}
+    {% if employee.active == True %}
     <div class="col mb-4">
       <div class="card">
         <div class="card-body">
@@ -21,6 +22,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% endfor %}
   </div>
   
