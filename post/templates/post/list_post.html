@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} posts {% endblock %}
+
+{% block content %}
+<div class="mt-4">
+  
+  <div class="ml-3">
+    <a class="btn btn-success" href="{% url 'new_employee' %}">novo registro</a>
+  </div>
+  <div class="row row-cols-1 row-cols-md-4 p-3">
+    {% for post in posts%}
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body">
+          <strong>funcionario: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
+          <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
+          <strong>preço: </strong><span>{{ post.task_id.price }}</span>
+          <div>
+            <a href="#">veja mais ...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="pagination d-flex justify-content-center m-4">
+    <span class="step-link">
+      {% if posts.has_previous %}
+      <a href="?page={{ posts.previous_page_number }}">voltar</a>
+      {% endif %}
+  
+      <span class="current">
+        {{ posts.number }} | {{  posts.paginator.num_pages }}
+      </span>
+  
+      {% if posts.has_next %}
+      <a href="?page={{ posts.next_page_number }}">proximo</a>
+      {% endif %}
+    </span>
+  </div>
+  
+</div>
+
+{% endblock %}
