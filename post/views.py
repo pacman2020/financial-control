@@ -52,3 +52,8 @@ def update_post(request, pk):
             'post': post
         }
         return render(request, 'post/new_update_post.html',data)
+
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk, user_id=request.user)
+    post.delete()
+    return redirect('posts')

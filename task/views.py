@@ -56,5 +56,6 @@ def update_task(request, pk):
 
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk, user_id=request.user)
-    task.delete()
+    task.active = False
+    task.save()
     return redirect('tasks')
