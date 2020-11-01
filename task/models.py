@@ -6,7 +6,7 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     employee = models.IntegerField()
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(blank=False)
     create_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

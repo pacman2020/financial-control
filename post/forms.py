@@ -1,11 +1,14 @@
+from task.models import Task
+from employee.models import Employee
 from django import forms
 # from django.db import models
 from django.forms import fields
 from .models import Post
 
 class PostForm(forms.ModelForm):
-    employee_id = forms.DecimalField(label='funcionario', required=True)
-    task_id = forms.DecimalField(label='tarefa', required=True)
+    # name = forms.CharField(label='nome da tarefa', max_length=100, required=True)
+    employee_id = forms.ModelChoiceField(queryset=Employee.objects.all(),label='funcionario',required=True )
+    task_id = forms.ModelChoiceField(queryset=Task.objects.all(),label='nome da tarefa',required=True )
 
     class Meta:
         model = Post

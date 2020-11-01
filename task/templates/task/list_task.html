@@ -11,12 +11,12 @@
   <div class="row row-cols-1 row-cols-md-4 p-3">
     {% for task in tasks%}
     <div class="col mb-4">
-      <div class="card">
+      <div class="card text-white" style="background-color: rgb(169, 122, 212);">
         <div class="card-body">
           <strong>tarefa: </strong><span>{{ task.name|slice:"15" }}...</span>
           <strong>valor: </strong><span>{{ task.price }}</span>
           <div>
-            <a href="{% url 'detail_task' task.id %}">veja mais ...</a>
+            <a class="text-white" href="{% url 'detail_task' task.id %}">veja mais ...</a>
           </div>
         </div>
       </div>

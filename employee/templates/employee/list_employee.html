@@ -12,12 +12,12 @@
     {% for employee in employees%}
     {% if employee.active == True %}
     <div class="col mb-4">
-      <div class="card">
+      <div class="card" style="background-color: rgb(68, 201, 194);">
         <div class="card-body">
           <strong>nome: </strong><span>{{ employee.full_name|slice:"15" }}...</span>
           <strong>ativo: </strong><span>{{ employee.active }}</span>
           <div>
-            <a href="{% url 'detail_employee' employee.id %}">veja mais ...</a>
+            <a class="text-white" href="{% url 'detail_employee' employee.id %}">veja mais ...</a>
           </div>
         </div>
       </div>

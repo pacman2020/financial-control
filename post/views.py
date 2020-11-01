@@ -3,9 +3,8 @@ from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
 
-# Create your views here.
 def list_post(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.order_by('-create_at')
 
     paginator = Paginator(post_list, 10)
     page = request.GET.get('page')
@@ -24,3 +23,15 @@ def detail_post(request, pk):
         return render(request, 'post/detail_post.html',data)
     except:
         return redirect('posts')
+
+def new_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user_id = request.user
+            post.save()
+            return redirect('detail_post', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post/new_update_post.html', {'form':form})
