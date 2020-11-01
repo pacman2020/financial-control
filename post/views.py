@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
@@ -14,3 +14,13 @@ def list_post(request):
     }
 
     return render(request, 'post/list_post.html', data)
+
+def detail_post(request, pk):
+    try:
+        post = get_object_or_404(Post,pk=pk)
+        data = {
+            'post': post
+        }
+        return render(request, 'post/detail_post.html',data)
+    except:
+        return redirect('posts')

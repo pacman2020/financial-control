@@ -17,7 +17,7 @@
           <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
           <strong>preço: </strong><span>{{ post.task_id.price }}</span>
           <div>
-            <a href="#">veja mais ...</a>
+            <a href="{% url 'detail_post' post.pk %}">veja mais ...</a>
           </div>
         </div>
       </div>
