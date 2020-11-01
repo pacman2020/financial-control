@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Post
@@ -35,3 +36,19 @@ def new_post(request):
     else:
         form = PostForm()
     return render(request, 'post/new_update_post.html', {'form':form})
+
+def update_post(request, pk):
+    post = get_object_or_404(Post, pk=pk, user_id=request.user)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post.save()
+            return redirect('detail_post', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+        data = {
+            'form':form,
+            'post': post
+        }
+        return render(request, 'post/new_update_post.html',data)

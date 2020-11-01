@@ -29,7 +29,7 @@
         <p><strong>valor do funcionario: </strong>{{ post.task_id.employee }} $</p>
         <p><strong>data de criação: </strong>{{ post.create_at }}</p>
         <div>
-            <a class="btn btn-primary" href="#">editar</a>
+            <a class="btn btn-primary" href="{% url 'update_post' post.pk %}">editar</a>
             <button type="button" 
                 data-toggle="modal" 
                 data-target="#confirm_exclir" class="btn btn-danger" >
