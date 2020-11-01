@@ -10,8 +10,12 @@ class PostForm(forms.ModelForm):
         label='funcionario',
         required=True
         )
+        
+    #vai lista apenas as tarefas ativas
+    list_task = Task.objects.filter(active=True)
+
     task_id = forms.ModelChoiceField(
-        queryset=Task.objects.all(),
+        queryset=list_task,
         label='nome da tarefa',
         required=True
         )
