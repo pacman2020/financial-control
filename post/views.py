@@ -13,27 +13,29 @@ def list_post(request):
     #busca por data
     if request.method == 'POST':
         search_data = str(request.POST.get('search'))
-
-        print('--->', search_data)
         if search_data:
             for x in post_list:
-                print('------>', str(x.create_at)[:10])
                 if str(x.create_at)[:10] == search_data:
                     new_list_posts.append(x)
             paginator = Paginator(new_list_posts, 10)
             page = request.GET.get('page')
             data = {
                 'posts': paginator.get_page(page),
+                'data_at': search_data
                 }
             return render(request, 'post/list_post.html', data)
-    else:
-        paginator = Paginator(post_list, 10)
-        page = request.GET.get('page')
-        data = {
-            'posts': paginator.get_page(page),
-        }
-        return render(request, 'post/list_post.html', data)
-    return render(request, 'post/list_post.html')
+    
+    for x in post_list:
+        if str(x.create_at)[:10] == data_at:
+            new_list_posts.append(x)    
+    paginator = Paginator(new_list_posts, 10)
+    page = request.GET.get('page')
+    data = {
+        'posts': paginator.get_page(page),
+        'data_at': data_at
+    }
+    return render(request, 'post/list_post.html', data)
+    # return render(request, 'post/list_post.html')
 
 def detail_post(request, pk):
     try:

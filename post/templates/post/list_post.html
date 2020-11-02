@@ -11,7 +11,7 @@
   <div class="ml-3 mt-2">
         <form method="post">{% csrf_token %}
           <input name="search" type="date">
-          <button type="submit">busca</button>
+          <button style="color: white ;background-color: #42aa45; border-radius: 4px; border: 2px solid #42aa45;" type="submit">busca</button>
         </form>
   </div>
   <div class="row row-cols-1 row-cols-md-4 p-3">
@@ -23,7 +23,6 @@
           <strong>funcionario: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
           <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
           <strong>preço: </strong><span>{{ post.task_id.price }}</span>
-          <strong>preço: </strong><span>{{ post.create_at }}</span>
           <div>
             <a class="text-white" href="{% url 'detail_post' post.pk %}">veja mais ...</a>
           </div>
@@ -34,7 +33,9 @@
     {% else %}
       <h3>não post hoje</h3>
     {% endif %}
-    <!-- {{ data_atual }} -->
+  </div>
+  <div class="text-center" >
+    {{ data_at }}
   </div>
   
   <div class="pagination d-flex justify-content-center m-4">
