@@ -3,17 +3,37 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
+from django.utils import timezone
 
 def list_post(request):
+    data_at = str(timezone.now())[:10]
+    new_list_posts = []
     post_list = Post.objects.order_by('-create_at')
 
-    paginator = Paginator(post_list, 10)
-    page = request.GET.get('page')
-    data = {
-        'posts': paginator.get_page(page)
-    }
+    #busca por data
+    if request.method == 'POST':
+        search_data = str(request.POST.get('search'))
 
-    return render(request, 'post/list_post.html', data)
+        print('--->', search_data)
+        if search_data:
+            for x in post_list:
+                print('------>', str(x.create_at)[:10])
+                if str(x.create_at)[:10] == search_data:
+                    new_list_posts.append(x)
+            paginator = Paginator(new_list_posts, 10)
+            page = request.GET.get('page')
+            data = {
+                'posts': paginator.get_page(page),
+                }
+            return render(request, 'post/list_post.html', data)
+    else:
+        paginator = Paginator(post_list, 10)
+        page = request.GET.get('page')
+        data = {
+            'posts': paginator.get_page(page),
+        }
+        return render(request, 'post/list_post.html', data)
+    return render(request, 'post/list_post.html')
 
 def detail_post(request, pk):
     try:

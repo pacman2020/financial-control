@@ -8,7 +8,14 @@
   <div class="ml-3">
     <a class="btn btn-success" href="{% url 'new_post' %}">novo registro</a>
   </div>
+  <div class="ml-3 mt-2">
+        <form method="post">{% csrf_token %}
+          <input name="search" type="date">
+          <button type="submit">busca</button>
+        </form>
+  </div>
   <div class="row row-cols-1 row-cols-md-4 p-3">
+    {% if posts %}
     {% for post in posts%}
     <div class="col mb-4 ">
       <div class="card" style="background-color: rgb(77, 241, 104);">
@@ -16,6 +23,7 @@
           <strong>funcionario: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
           <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
           <strong>preço: </strong><span>{{ post.task_id.price }}</span>
+          <strong>preço: </strong><span>{{ post.create_at }}</span>
           <div>
             <a class="text-white" href="{% url 'detail_post' post.pk %}">veja mais ...</a>
           </div>
@@ -23,6 +31,10 @@
       </div>
     </div>
     {% endfor %}
+    {% else %}
+      <h3>não post hoje</h3>
+    {% endif %}
+    <!-- {{ data_atual }} -->
   </div>
   
   <div class="pagination d-flex justify-content-center m-4">
