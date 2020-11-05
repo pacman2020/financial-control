@@ -34,19 +34,27 @@
       <h3>não post hoje</h3>
     {% endif %}
   </div>
-  <div class="text-center" >
+
+  <div class="bg-success text-center p-3 " >
     <div>
       {{ data_at }}
     </div>
-    <div>
-      <strong>funcionario</strong>
-      {% for employee in employees %}
-        <p>{{ employee.names }}: {{ employee.prices }} $</p>
-      {% endfor %}
-    </div>
-    <div>
-      <strong>company</strong>
-        <p>{{ company }}$</p>
+
+    <div class="d-flex justify-content-around" >
+
+      <div class="d-flex flex-column justify-content-start text-center text-white">
+        <strong>Caixa da oficina</strong>
+          <p>{{ company }}$</p>
+      </div>
+
+      <div class="d-flex flex-column justify-content-start text-center text-white">
+        <strong> Caixa do funcionario</strong>
+        {% for employee in employees %}
+          <span>{{ employee.names }}: {{ employee.prices }} $</span>
+        {% endfor %}
+      </div>
+  
+
     </div>
   </div>
   
