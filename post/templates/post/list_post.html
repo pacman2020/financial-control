@@ -20,7 +20,7 @@
     <div class="col mb-4 ">
       <div class="card" style="background-color: rgb(77, 241, 104);">
         <div class="card-body">
-          <strong>funcionario: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
+          <strong>tarefa: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
           <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
           <strong>preço: </strong><span>{{ post.task_id.price }}</span>
           <div>
@@ -43,6 +43,10 @@
       {% for employee in employees %}
         <p>{{ employee.names }}: {{ employee.prices }} $</p>
       {% endfor %}
+    </div>
+    <div>
+      <strong>company</strong>
+        <p>{{ company }}$</p>
     </div>
   </div>
   
