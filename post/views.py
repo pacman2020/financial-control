@@ -4,38 +4,85 @@ from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
 from django.utils import timezone
+from functools import reduce
+
+def daily_value(employee_data):
+    '''
+        sum of the earnings of each employee to 
+        return a dictionary from each of them
+    '''
+    new_list = {}
+    for x in employee_data:
+        for key,value in x.items():
+            if key in new_list:
+                a = (new_list[key] + value)
+                new_list[key] = a
+            else:
+                new_list[key] = value
+
+    return new_list
+
+def formatting_employee_data(lista):
+    '''
+        organizes and returns the data in a dictionary
+        list to be displayed on the screen
+    '''
+    chaves = []
+    novo_obj = []
+    for x in lista:
+        chaves.append(x)
+        novo_obj.append({ 
+                'names': x,
+                'prices': lista[x]
+            })
+    return novo_obj
+
 
 def list_post(request):
     data_at = str(timezone.now())[:10]
     new_list_posts = []
+    new_list_employees = []
     post_list = Post.objects.order_by('-create_at')
 
-    #busca por data
+    #search for dates
     if request.method == 'POST':
         search_data = str(request.POST.get('search'))
         if search_data:
             for x in post_list:
                 if str(x.create_at)[:10] == search_data:
+                    new_list_employees.append({ x.employee_id.full_name : float(x.task_id.price)})
                     new_list_posts.append(x)
+
+            employees = daily_value(new_list_employees)
+            new_formatted_employees = formatting_employee_data(employees)
+
             paginator = Paginator(new_list_posts, 10)
             page = request.GET.get('page')
+
             data = {
                 'posts': paginator.get_page(page),
-                'data_at': search_data
+                'data_at': search_data,
+                'employees': new_formatted_employees
                 }
             return render(request, 'post/list_post.html', data)
     
     for x in post_list:
         if str(x.create_at)[:10] == data_at:
-            new_list_posts.append(x)    
+            new_list_employees.append({ x.employee_id.full_name : float(x.task_id.price)})
+            new_list_posts.append(x)
+
+    employees = daily_value(new_list_employees)
+    new_formatted_employees = formatting_employee_data(employees)
+
     paginator = Paginator(new_list_posts, 10)
     page = request.GET.get('page')
+
     data = {
         'posts': paginator.get_page(page),
-        'data_at': data_at
+        'data_at': data_at,
+        'employees': new_formatted_employees
     }
     return render(request, 'post/list_post.html', data)
-    # return render(request, 'post/list_post.html')
 
 def detail_post(request, pk):
     try:

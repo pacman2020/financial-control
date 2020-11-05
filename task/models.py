@@ -5,6 +5,7 @@ class Task(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    #dono = models.IntegerField()
     employee = models.IntegerField()
     active = models.BooleanField(blank=False)
     create_at = models.DateTimeField(auto_now_add=True)

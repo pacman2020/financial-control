@@ -35,7 +35,15 @@
     {% endif %}
   </div>
   <div class="text-center" >
-    {{ data_at }}
+    <div>
+      {{ data_at }}
+    </div>
+    <div>
+      <strong>funcionario</strong>
+      {% for employee in employees %}
+        <p>{{ employee.names }}: {{ employee.prices }} $</p>
+      {% endfor %}
+    </div>
   </div>
   
   <div class="pagination d-flex justify-content-center m-4">
