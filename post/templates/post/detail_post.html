@@ -20,14 +20,14 @@
       </div>
 </div>
 
-<div>
+<div class="p-3 text-white rounded" style="background-color: rgb(66, 199, 88);">
     <h3>Sobre o Employee</h2>
         
         <p><strong>funcionario: </strong>{{ post.employee_id }}</p>
         <p><strong>tarefa: </strong>{{post.task_id }}</p>
         <p><strong>preço: </strong>{{ post.task_id.price }} $</p>
-        <p><strong>valor do empresa: </strong>{{ post.task_id.company }} $</p>
-        <p><strong>valor do funcionario: </strong>{{ post.task_id.employee }} $</p>
+        <p><strong>caixa da empresa: </strong>{{ post.task_id.company }} $</p>
+        <p><strong>caixa do funcionario: </strong>{{ post.task_id.employee }} $</p>
         <p><strong>data de criação: </strong>{{ post.create_at }}</p>
         <div>
             <a class="btn btn-primary" href="{% url 'update_post' post.pk %}">editar</a>

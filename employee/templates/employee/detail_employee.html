@@ -20,11 +20,10 @@
       </div>
 </div>
 
-<div>
+<div class="p-3 text-white rounded" style="background-color: rgb(48, 172, 48);">
     <h3>Sobre o Employee</h2>
         
         <p><strong>Nome: </strong>{{ employee.full_name }}</p>
-        <p><strong>ativo: </strong>{{ employee.active }}</p>
         <div>
             <a class="btn btn-primary" href="{% url 'update_employee' employee.pk %}">editar</a>
             <button type="button" 
