@@ -1,9 +1,10 @@
-from django.http import request
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 from functools import reduce
 
 def daily_value(employee_data):
@@ -37,7 +38,7 @@ def formatting_employee_data(lista):
             })
     return novo_obj
 
-
+@login_required
 def list_post(request):
     data_at = str(timezone.now())[:10]
     new_list_posts = []
@@ -89,6 +90,7 @@ def list_post(request):
     }
     return render(request, 'post/list_post.html', data)
 
+@login_required
 def detail_post(request, pk):
     try:
         post = get_object_or_404(Post,pk=pk)
@@ -99,6 +101,7 @@ def detail_post(request, pk):
     except:
         return redirect('posts')
 
+@login_required
 def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -111,6 +114,7 @@ def new_post(request):
         form = PostForm()
     return render(request, 'post/new_update_post.html', {'form':form})
 
+@login_required
 def update_post(request, pk):
     post = get_object_or_404(Post, pk=pk, user_id=request.user)
 
@@ -127,6 +131,7 @@ def update_post(request, pk):
         }
         return render(request, 'post/new_update_post.html',data)
 
+@login_required
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk, user_id=request.user)
     post.delete()

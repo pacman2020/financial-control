@@ -2,8 +2,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Employee
 from .forms import EmployeeForm
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required
 def employees(request):
     list_employees = Employee.objects.all()
     paginator = Paginator(list_employees, 10)
@@ -13,6 +14,7 @@ def employees(request):
     }
     return render(request,'employee/list_employee.html', data)
 
+@login_required
 def detail_employee(request, pk):
     try:
         employee = get_object_or_404(Employee,pk=pk)
@@ -23,6 +25,7 @@ def detail_employee(request, pk):
     except:
         return redirect('employees')
 
+@login_required
 def new_employee(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
@@ -35,6 +38,7 @@ def new_employee(request):
         form = EmployeeForm()
     return render(request, 'employee/new_update_employee.html', {'form':form})
 
+@login_required
 def update_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk, user_id=request.user)
 
@@ -51,6 +55,7 @@ def update_employee(request, pk):
         }
         return render(request, 'employee/new_update_employee.html',data)
 
+@login_required
 def delete_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk, user_id=request.user)
     employee.active = False

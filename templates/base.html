@@ -8,6 +8,7 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
+  {% if user.is_authenticated %}
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Financial Control</a>
@@ -23,10 +24,20 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url 'employees' %}">funcionarios</a>
                 </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                </li>
               </ul>
             </div>
           </nav>
     </header>
+    {% else %}
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center p-3">
+         <h2 class="text-white" >Financial Control</h2>
+      </nav>
+  </header>
+    {% endif %}
     <main class="container" >
         {% block content %}{% endblock %}
     </main>

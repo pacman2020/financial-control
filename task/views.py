@@ -3,8 +3,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Task
 from .forms import Taskform
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required
 def tasks(request):
     task_list = Task.objects.all()
 
@@ -16,6 +17,7 @@ def tasks(request):
 
     return render(request, 'task/list_task.html', data)
 
+@login_required
 def detail_task(request, pk):
     try:
         task = get_object_or_404(Task,pk=pk)
@@ -26,6 +28,7 @@ def detail_task(request, pk):
     except:
         return redirect('tasks')
 
+@login_required
 def new_task(request):
     if request.method == 'POST':
         form = Taskform(request.POST)
@@ -38,6 +41,7 @@ def new_task(request):
         form = Taskform()
     return render(request, 'task/new_update_pet.html', {'form':form})
 
+@login_required
 def update_task(request, pk):
     task = get_object_or_404(Task, pk=pk, user_id=request.user)
 
@@ -54,6 +58,7 @@ def update_task(request, pk):
         }
         return render(request, 'task/new_update_pet.html',data)
 
+@login_required
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk, user_id=request.user)
     task.active = False
