@@ -32,7 +32,9 @@
     </div>
     {% endfor %}
     {% else %}
-    <h3>não post hoje</h3>
+    <div class="container">
+      <h1 class="text-center text-success">Postagem não encontrada!</h1>
+    </div>
     {% endif %}
   </div>
 
@@ -49,10 +51,10 @@
           <p>{{ company }}$</p>
       </div>
 
-      <div class="d-flex flex-column justify-content-start text-center text-white">
+      <div class="d-flex flex-column justify-content-start  text-white">
         <strong> Caixa do funcionario</strong>
         {% for employee in employees %}
-          <span>{{ employee.names }}: {{ employee.prices }} $</span>
+          <span>{{ employee.names|slice:"8" }}: {{ employee.prices }} $</span>
         {% endfor %}
       </div>
     </div>
