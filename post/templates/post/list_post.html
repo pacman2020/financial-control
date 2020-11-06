@@ -4,15 +4,16 @@
 
 {% block content %}
 <div class="mt-4">
-  
+
   <div class="ml-3">
     <a class="btn btn-success" href="{% url 'new_post' %}">novo registro</a>
   </div>
   <div class="ml-3 mt-2">
-        <form method="post">{% csrf_token %}
-          <input name="search" type="date">
-          <button style="color: white ;background-color: #42aa45; border-radius: 4px; border: 2px solid #42aa45;" type="submit">busca</button>
-        </form>
+    <form method="post">{% csrf_token %}
+      <input name="search" type="date">
+      <button style="color: white ;background-color: #42aa45; border-radius: 4px; border: 2px solid #42aa45;"
+        type="submit">busca</button>
+    </form>
   </div>
   <div class="row row-cols-1 row-cols-md-4 p-3">
     {% if posts %}
@@ -31,10 +32,11 @@
     </div>
     {% endfor %}
     {% else %}
-      <h3>não post hoje</h3>
+    <h3>não post hoje</h3>
     {% endif %}
   </div>
 
+  {% if company %}
   <div class="bg-success text-center p-3 rounded-bottom" >
     <div>
       {{ data_at }}
@@ -53,27 +55,26 @@
           <span>{{ employee.names }}: {{ employee.prices }} $</span>
         {% endfor %}
       </div>
-  
-
     </div>
   </div>
-  
+  {% endif %}
+
   <div class="pagination d-flex justify-content-center m-4">
     <span class="step-link">
       {% if posts.has_previous %}
       <a href="?page={{ posts.previous_page_number }}">voltar</a>
       {% endif %}
-  
+
       <span class="current">
         {{ posts.number }} | {{  posts.paginator.num_pages }}
       </span>
-  
+
       {% if posts.has_next %}
       <a href="?page={{ posts.next_page_number }}">proximo</a>
       {% endif %}
     </span>
   </div>
-  
+
 </div>
 
 {% endblock %}

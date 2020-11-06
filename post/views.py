@@ -20,23 +20,36 @@ def daily_value(employee_data):
                 new_list[key] = a
             else:
                 new_list[key] = value
-
-    return new_list
+    if new_list:
+        return new_list
+    else:
+        return None
 
 def formatting_employee_data(lista):
     '''
         organizes and returns the data in a dictionary
         list to be displayed on the screen
     '''
-    chaves = []
-    novo_obj = []
-    for x in lista:
-        chaves.append(x)
-        novo_obj.append({ 
-                'names': x,
-                'prices': lista[x]
-            })
-    return novo_obj
+    if lista:
+        chaves = []
+        novo_obj = []
+        for x in lista:
+            chaves.append(x)
+            novo_obj.append({ 
+                    'names': x,
+                    'prices': lista[x]
+                })
+
+        return novo_obj
+    else:
+        return None
+
+def daily_company_value(cashier):
+    if cashier:
+        company = reduce(lambda x, y: x+y,cashier)
+        return company
+    else:
+        return None
 
 @login_required
 def list_post(request):
@@ -58,6 +71,7 @@ def list_post(request):
 
             employees = daily_value(new_list_employees)
             cashier_employees = formatting_employee_data(employees)
+            cashier_company = daily_company_value(cashier_company)
 
             paginator = Paginator(new_list_posts, 8)
             page = request.GET.get('page')
@@ -66,7 +80,7 @@ def list_post(request):
                 'posts': paginator.get_page(page),
                 'data_at': search_data,
                 'employees': cashier_employees,
-                'company': reduce(lambda x, y: x+y,cashier_company)
+                'company': cashier_company
                 }
             return render(request, 'post/list_post.html', data)
     
@@ -78,6 +92,7 @@ def list_post(request):
 
     employees = daily_value(new_list_employees)
     cashier_employees = formatting_employee_data(employees)
+    full_value_company = daily_company_value(cashier_company)
 
     paginator = Paginator(new_list_posts, 8)
     page = request.GET.get('page')
@@ -86,7 +101,7 @@ def list_post(request):
         'posts': paginator.get_page(page),
         'data_at': data_at,
         'employees': cashier_employees,
-        'company': reduce(lambda x, y: x+y,cashier_company)
+        'company': full_value_company
     }
     return render(request, 'post/list_post.html', data)
 
