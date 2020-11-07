@@ -30,7 +30,7 @@
         <p><strong>quntidade: </strong>{{ product.amount }}</p>
         <p><strong>data de criação: </strong>{{ product.create_at }}</p>
         <div>
-            <a class="btn btn-primary" href="#">editar</a>
+            <a class="btn btn-primary" href="{% url 'update_product' product.pk %}">editar</a>
             <button type="button" 
                 data-toggle="modal" 
                 data-target="#confirm_exclir" class="btn btn-danger" >

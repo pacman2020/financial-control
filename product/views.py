@@ -1,8 +1,8 @@
 from functools import reduce
-
 from django.contrib.auth.decorators import login_required
-from product.models import Product
+from .models import Product
 from django.core.paginator import Paginator
+from .forms import Productform
 from django.shortcuts import get_object_or_404, redirect, render
 
 # def daily_company_value(cashier):
@@ -40,3 +40,31 @@ def detail_product(request, pk):
         return render(request, 'product/detail_product.html',data)
     except:
         return redirect('products')
+
+def new_product(request):
+    if request.method == 'POST':
+        form = Productform(request.POST)
+        if form.is_valid():
+            service = form.save(commit=False)
+            service.user_id = request.user
+            service.save()
+            return redirect('detail_product', pk=service.pk)
+    else:
+        form = Productform()
+    return render(request, 'product/new_update_product.html', {'form':form})
+
+def update_product(request, pk):
+    product = get_object_or_404(Product, pk=pk, user_id=request.user)
+
+    if request.method == 'POST':
+        form = Productform(request.POST, instance=product)
+        if form.is_valid():
+            product.save()
+            return redirect('detail_product', pk=product.pk)
+    else:
+        form = Productform(instance=product)
+        data = {
+            'form':form,
+            'product': product
+        }
+        return render(request, 'product/new_update_product.html',data)

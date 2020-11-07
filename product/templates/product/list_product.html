@@ -6,7 +6,7 @@
 <div class="mt-4">
   
   <div class="ml-3">
-    <a class="btn btn-success" href="#">novo produto</a>
+    <a class="btn btn-success" href="{% url 'new_product'%}">novo produto</a>
   </div>
   <div class="row row-cols-1 row-cols-md-4 p-3">
     {% for product in products%}
