@@ -17,7 +17,7 @@
           <strong>produto: </strong><span>{{ product.name_product|slice:"15" }}...</span>
           <strong>quantidade: </strong><span>{{ product.amount }}</span>
           <div>
-            <a class="text-white" href="#">veja mais ...</a>
+            <a class="text-white" href="{% url 'detail_product' product.pk %}">veja mais ...</a>
           </div>
         </div>
       </div>

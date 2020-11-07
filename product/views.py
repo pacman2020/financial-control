@@ -1,7 +1,9 @@
 from functools import reduce
+
+from django.contrib.auth.decorators import login_required
 from product.models import Product
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 
 # def daily_company_value(cashier):
 #     if cashier:
@@ -27,3 +29,14 @@ def products(request):
     }
 
     return render(request, 'product/list_product.html', data)
+
+# @login_required
+def detail_product(request, pk):
+    try:
+        product = get_object_or_404(Product,pk=pk)
+        data = {
+            'product': product
+        }
+        return render(request, 'product/detail_product.html',data)
+    except:
+        return redirect('products')

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} detail task {% endblock %}
+{% block title %} detail product {% endblock %}
 
 {% block content %}
 <div class="mt-4">
@@ -9,27 +9,28 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>deseja exclir esse funcionario?</h4>
+                <h4>deseja exclir esse serviço?</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-right">
-                <a type="button" class="btn btn-danger" href="{% url 'delete_post' post.pk %}" >DELETER</a>
+                <a type="button" class="btn btn-danger" href="#" >DELETER</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
             </div>
         </div>
       </div>
 </div>
 
-<div class="p-3 text-white rounded" style="background-color: rgb(66, 199, 88);">
-    <h3>Sobre o Employee</h2>
+<div class="p-3 text-white rounded" style="background-color: rgb(231, 116, 62);">
+    <h3>Sobre o Produto</h2>
         
-        <p><strong>funcionario: </strong>{{ post.employee_id }}</p>
-        <p><strong>tarefa: </strong>{{post.service_id }}</p>
-        <p><strong>preço: </strong>{{ post.service_id.price }} $</p>
-       
-        <p><strong>data de criação: </strong>{{ post.create_at }}</p>
+        <p><strong>produto: </strong>{{product.name_product }}</p>
+        <p><strong>fornecedo: </strong>{{ product.supplier_name }} $</p>
+        <p><strong>valor de revenda: </strong>{{ product.resale_value }}</p>
+        <p><strong>valor de comercial: </strong>{{ product.commercial_value }}</p>
+        <p><strong>quntidade: </strong>{{ product.amount }}</p>
+        <p><strong>data de criação: </strong>{{ product.create_at }}</p>
         <div>
-            <a class="btn btn-primary" href="{% url 'update_post' post.pk %}">editar</a>
+            <a class="btn btn-primary" href="#">editar</a>
             <button type="button" 
                 data-toggle="modal" 
                 data-target="#confirm_exclir" class="btn btn-danger" >
