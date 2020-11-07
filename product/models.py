@@ -7,7 +7,7 @@ class Product(models.Model):
     supplier_name = models.CharField(max_length=200)
     resale_value = models.DecimalField(max_digits=5, decimal_places=2)
     commercial_value = models.DecimalField(max_digits=5, decimal_places=2)
-    amount = models.IntegerField()
+    amount = models.IntegerField(blank=False)
     active = models.BooleanField(blank=False)
     create_at = models.DateTimeField(auto_now_add=True)
 
