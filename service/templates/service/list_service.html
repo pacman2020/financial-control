@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} service {% endblock %}
+
+{% block content %}
+<div class="mt-4">
+  
+  <div class="ml-3">
+    <a class="btn btn-success" href="{% url 'new_service' %}">novo serviço</a>
+  </div>
+  <div class="row row-cols-1 row-cols-md-4 p-3">
+    {% for service in services%}
+    {% if service.active == True %}
+    <div class="col mb-4">
+      <div class="card text-white" style="background-color: rgb(154, 99, 206);">
+        <div class="card-body">
+          <strong>tarefa: </strong><span>{{ service.name|slice:"15" }}...</span>
+          <strong>valor: </strong><span>{{ service.price }}</span>
+          <div>
+            <a class="text-white" href="{% url 'detail_service' service.pk %}">veja mais ...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="pagination d-flex justify-content-center m-4">
+    <span class="step-link">
+      {% if services.has_previous %}
+      <a href="?page={{ services.previous_page_number }}">voltar</a>
+      {% endif %}
+  
+      <span class="current">
+        {{ services.number }} | {{  services.paginator.num_pages }}
+      </span>
+  
+      {% if services.has_next %}
+      <a href="?page={{ services.next_page_number }}">proximo</a>
+      {% endif %}
+    </span>
+  </div>
+  
+</div>
+
+{% endblock %}

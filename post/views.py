@@ -44,8 +44,6 @@ def formatting_employee_data(lista):
     else:
         return None
 
-
-
 @login_required
 def list_post(request):
     data_at = str(timezone.now())[:10]
@@ -59,7 +57,7 @@ def list_post(request):
         if search_data:
             for x in post_list:
                 if str(x.create_at)[:10] == search_data:
-                    new_list_employees.append({ x.employee_id.full_name : float(x.task_id.price)})
+                    new_list_employees.append({ x.employee_id.full_name : float(x.service_id.price)})
                     new_list_posts.append(x)
 
             employees = daily_value(new_list_employees)
@@ -77,7 +75,7 @@ def list_post(request):
     
     for x in post_list:
         if str(x.create_at)[:10] == data_at:
-            new_list_employees.append({ x.employee_id.full_name : float(x.task_id.price)})
+            new_list_employees.append({ x.employee_id.full_name : float(x.service_id.price)})
             new_list_posts.append(x)
 
     employees = daily_value(new_list_employees)

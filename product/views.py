@@ -1,6 +1,5 @@
 from functools import reduce
 from product.models import Product
-from task.models import Task
 from django.core.paginator import Paginator
 from django.shortcuts import render
 

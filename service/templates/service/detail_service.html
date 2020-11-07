@@ -9,26 +9,26 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>deseja exclir esse funcionario?</h4>
+                <h4>deseja exclir esse serviço?</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-right">
-                <a type="button" class="btn btn-danger" href="{% url 'delete_post' post.pk %}" >DELETER</a>
+                <a type="button" class="btn btn-danger" href="{% url 'delete_service' service.pk %}" >DELETER</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
             </div>
         </div>
       </div>
 </div>
 
-<div class="p-3 text-white rounded" style="background-color: rgb(66, 199, 88);">
-    <h3>Sobre o Employee</h2>
+<div class="p-3 text-white rounded" style="background-color: rgb(154, 99, 206);">
+    <h3>Sobre o service</h2>
         
-        <p><strong>funcionario: </strong>{{ post.employee_id }}</p>
-        <p><strong>tarefa: </strong>{{post.service_id }}</p>
-        <p><strong>preço: </strong>{{ post.service_id.price }} $</p>
-        <p><strong>data de criação: </strong>{{ post.create_at }}</p>
+        <p><strong>cidade: </strong>{{ service.name }}</p>
+        <p><strong>preço: </strong>{{ service.price }} $</p>
+        <p><strong>ativo: </strong>{{ service.active }}</p>
+        <p><strong>data de criação: </strong>{{ service.create_at }}</p>
         <div>
-            <a class="btn btn-primary" href="{% url 'update_post' post.pk %}">editar</a>
+            <a class="btn btn-primary" href="{% url 'update_service' service.pk %}">editar</a>
             <button type="button" 
                 data-toggle="modal" 
                 data-target="#confirm_exclir" class="btn btn-danger" >

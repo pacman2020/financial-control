@@ -22,8 +22,8 @@
       <div class="card" style="background-color:  rgb(66, 199, 88);">
         <div class="card-body">
           <strong>tarefa: </strong><span>{{ post.employee_id.full_name|slice:"15" }}...</span>
-          <strong>tarefa: </strong><span>{{ post.task_id.name|slice:"15" }}...</span>
-          <strong>preço: </strong><span>{{ post.task_id.price }}</span>
+          <strong>tarefa: </strong><span>{{ post.service_id.name|slice:"15" }}...</span>
+          <strong>preço: </strong><span>{{ post.service_id.price }}</span>
           <div>
             <a class="text-white" href="{% url 'detail_post' post.pk %}">veja mais ...</a>
           </div>
