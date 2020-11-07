@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'task',
     'employee',
     'post',
+    'product',
 ]
 
 MIDDLEWARE = [
