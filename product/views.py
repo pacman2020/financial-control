@@ -17,8 +17,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 # cashier_company = daily_company_value(cashier_company)
 
 
-
-# Create your views here.
+@login_required
 def products(request):
     product_list = Product.objects.all()
 
@@ -30,7 +29,7 @@ def products(request):
 
     return render(request, 'product/list_product.html', data)
 
-# @login_required
+@login_required
 def detail_product(request, pk):
     try:
         product = get_object_or_404(Product,pk=pk)
@@ -53,6 +52,7 @@ def new_product(request):
         form = Productform()
     return render(request, 'product/new_update_product.html', {'form':form})
 
+@login_required
 def update_product(request, pk):
     product = get_object_or_404(Product, pk=pk, user_id=request.user)
 
@@ -68,3 +68,10 @@ def update_product(request, pk):
             'product': product
         }
         return render(request, 'product/new_update_product.html',data)
+
+@login_required
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk, user_id=request.user)
+    product.active = False
+    product.save()
+    return redirect('products')
